@@ -11,9 +11,18 @@ module.exports = function(app) {
     });
   });
 
+  // TESTING ROUTE FOR API CALLS
+  app.get("/test", function(req, res) {
+    res.render("test", {
+      msg: "TEST PAGE"
+    });
+  });
+
   // Load example page and pass in an example by id
   app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
+    db.Example.findOne({ where: { id: req.params.id } }).then(function(
+      dbExample
+    ) {
       res.render("example", {
         example: dbExample
       });

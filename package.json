@@ -16,6 +16,7 @@
     "express-handlebars": "^3.0.0",
     "materialize-css": "^1.0.0-rc.2",
     "mysql2": "^1.6.4",
+    "newsapi": "^2.4.0",
     "sequelize": "^5.8.1"
   },
   "devDependencies": {
