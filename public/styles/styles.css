@@ -1,3 +1,23 @@
+/* GLOBAL */
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
 .list-group-item {
   line-height: 2.5;
+}
+
+/* MATERIALIZE COMPONENTS */
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
 }
