@@ -21,15 +21,21 @@
     <div class="nav-wrapper">
       <a href="#" class="brand-logo">Project 2</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="#"><i class="small material-icons">person_add</i></a></li>
-        <li><a href="#"><i class="small material-icons">person</i></a></li>
+        <li><a href="#"><i class="small material-icons modal-trigger" data-target="modal-signup">person_add</i></a></li>
+
+        <li><a href="#"><i class="small material-icons modal-trigger" data-target="modal-login">person</i></a></li>
+
+        <li><a href="#"><i id="Logout" class="small material-icons">person_outline</i></a></li>
+
         <li><a href="#">My Topics</a></li>
       </ul>
     </div>
   </nav>
 
   <main>
+    
     {{{body}}}
+
   </main>
 
   <footer class="page-footer">
@@ -51,6 +57,7 @@
 
   <!-- Materialize JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 </body>
 
 </html>

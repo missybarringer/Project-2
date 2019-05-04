@@ -1,3 +1,39 @@
+  <!-- SIGN UP MODAL -->
+<div id="modal-signup" class="modal">
+    <div class="modal-content">
+        <h4>Sign Up</h4><br />
+        <form action="" id="signup-form">
+            <div class="input-field">
+                <input type="email" id="signup-email" required />
+                <label for="signup-email"> Email address </label>
+            </div>
+            <div class="input-field">
+                <input type="password" id="signup-password" required />
+                <label for="signup-password">Enter Password</label>
+            </div>
+            <button class="btn waves-effect waves-light z-depth-0">Sign Up</button>
+        </form>
+    </div>
+</div>
+
+    <!-- LOGIN MODAL -->
+<div id="modal-login" class="modal">
+    <div class="modal-content">
+        <h4>Login</h4><br />
+        <form action="" id="login-form">
+            <div class="input-field">
+                <input type="email" id="login-email" required />
+                <label for="login-email"> Email address </label>
+            </div>
+            <div class="input-field">
+                <input type="password" id="login-password" required />
+                <label for="login-password">Your Password</label>
+            </div>
+            <button class="btn waves-effect waves-light z-depth-0">Login</button>
+        </form>
+    </div>
+</div>
+
 <div id="home">
   <div class="container">
     <div class="row">
@@ -28,6 +64,11 @@
     </div>
   </div>
 </div>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-firestore.js"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
