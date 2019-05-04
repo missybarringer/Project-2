@@ -12,9 +12,14 @@ module.exports = function(app) {
   });
 
   // TESTING ROUTE FOR API CALLS
-  app.get("/test", function(req, res) {
-    res.render("test", {
-      msg: "TEST PAGE"
+  app.get("/article/:id", function(req, res) {
+    db.Article.findOne({ where: { id: req.params.id } }).then(function(
+      dbArticle
+    ) {
+      res.render("article", {
+        msg: "TEST PAGE",
+        article: dbArticle
+      });
     });
   });
 
