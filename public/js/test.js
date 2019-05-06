@@ -19,7 +19,35 @@ function axiosCall(input) {
     var author = article.author;
     var body = article.content;
     var url = article.url;
+    // var db = require("./models");
+    // db.Article.create({
+    //   title: article.title,
+    //   author: article.author,
+    //   body: article.content,
+    //   url: article.url
+    // }).then(function(dbArticle) {
+    //   console.log(dbArticle);
+    // });
+    $(".create-form").on("submit", function(event) {
+      // Make sure to preventDefault on a submit event.
+      event.preventDefault();
 
+      var newArticle = {
+        title: title,
+        author: author,
+        body: body,
+        url: url
+      };
+
+      // Send the POST request.
+      $.ajax("/api/articles", {
+        type: "POST",
+        data: newArticle
+      }).then(function() {
+        console.log("created new article");
+        // Reload the page to get the updated list
+      });
+    });
     console.log(title);
     console.log(author);
     console.log(body);

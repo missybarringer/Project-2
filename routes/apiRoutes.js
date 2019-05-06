@@ -23,4 +23,11 @@ module.exports = function(app) {
       res.json(dbExample);
     });
   });
+
+  // Create a new article
+  app.post("/api/articles", function(req, res) {
+    db.Article.create(req.body).then(function(dbArticle) {
+      res.json(dbArticle);
+    });
+  });
 };
