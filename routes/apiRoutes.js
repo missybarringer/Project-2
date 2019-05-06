@@ -23,14 +23,9 @@ module.exports = function(app) {
       res.json(dbExample);
     });
   });
-  // Get one article
-  app.get("/api/articles/:id", function(req, res) {
-    db.Article.findOne({}).then(function(dbArticles) {
-      res.json(dbArticles);
-    });
-  });
+
   // Create a new article
-  app.post("/api/articles/:id", function(req, res) {
+  app.post("/api/articles", function(req, res) {
     db.Article.create(req.body).then(function(dbArticle) {
       res.json(dbArticle);
     });

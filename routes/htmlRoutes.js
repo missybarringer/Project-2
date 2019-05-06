@@ -12,13 +12,21 @@ module.exports = function(app) {
   });
 
   // TESTING ROUTE FOR API CALLS
-  app.get("/article/:id", function(req, res) {
-    db.Article.findOne({ where: { id: req.params.id } }).then(function(
-      dbArticle
-    ) {
+  app.get("/test", function(req, res) {
+    db.Article.findAll({}).then(function(dbArticles) {
+      res.render("test", {
+        msg: "Test Page!",
+        articles: dbArticles
+      });
+    });
+  });
+
+  // TESTING ROUTE FOR API CALLS
+  app.get("/articles", function(req, res) {
+    db.Article.findOne({ where: { id: [1] } }).then(function(dbArticles) {
       res.render("article", {
-        msg: "TEST PAGE",
-        article: dbArticle
+        msg: "Article Page!",
+        articles: dbArticles
       });
     });
   });
