@@ -4,17 +4,22 @@
       <div class="col-8 offset-2">
         <h1>{{msg}}</h1>
         <div class="article">
-        <ul id="article-list" class="list-group">
 
-          {{#with articles}}
-          <li data-id="{{this.id}}" class="list-group-item">
-          <h4>{{this.title}}</h4>
-          <b>Author: </b>{{this.author}}<br>
-          {{this.body}}<br>
-            <a href="{{this.url}}" target="_blank"><button class="btn btn-danger float-right">Read More</button></a>
-          </li>
-          {{/with}}
-        </ul>
+          <ul class="collapsible popout">
+
+            {{#each articles}}
+
+            <li>
+              <div class="collapsible-header"><i class="material-icons">filter_drama</i>{{this.title}}</div>
+              <div class="collapsible-body">
+                {{this.body}}
+                <button> <a href="{{this.url}}" target="_blank">Read more</a></button>
+              </div>
+            </li>
+
+            {{/each}}
+
+          </ul>
         </div>
 
       </div>
