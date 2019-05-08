@@ -29,100 +29,6 @@ var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
-// The API object contains methods for each kind of request we'll make
-var API = {
-  saveExample: function(example) {
-    return $.ajax({
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      url: "api/examples",
-      data: JSON.stringify(example)
-    });
-  },
-  getExamples: function() {
-    return $.ajax({
-      url: "api/examples",
-      type: "GET"
-    });
-  },
-  deleteExample: function(id) {
-    return $.ajax({
-      url: "api/examples/" + id,
-      type: "DELETE"
-    });
-  }
-};
-
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
-      var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
-
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": example.id
-        })
-        .append($a);
-
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
-
-      $li.append($button);
-
-      return $li;
-    });
-
-    $exampleList.empty();
-    $exampleList.append($examples);
-  });
-};
-
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
-  event.preventDefault();
-
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
-  };
-
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
-    return;
-  }
-
-  API.saveExample(example).then(function() {
-    refreshExamples();
-  });
-
-  $exampleText.val("");
-  $exampleDescription.val("");
-};
-
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
-  var idToDelete = $(this)
-    .parent()
-    .attr("data-id");
-
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
-  });
-};
-
-// Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
-
 
 
 // signup user
@@ -196,3 +102,64 @@ logout.addEventListener('click', (e) => {
     console.log('user signed out');
   });
 });
+
+
+// API search
+//===============================================================
+
+$("#api-test").on("click", function() {
+  topicInput = $("#topic-input")
+    .val()
+    .trim();
+
+  axiosCall(topicInput);
+});
+
+function axiosCall(input) {
+  var url =
+    "https://newsapi.org/v2/everything?q=" +
+    input +
+    "&pageSize=1&apiKey=1b3b33c2dd9a427aab31f5e1f7dc78e4";
+
+  axios.get(url).then(function(response) {
+    var article = response.data.articles[0];
+
+    var title = article.title;
+    var author = article.author;
+    var body = article.content;
+    var url = article.url;
+    // var db = require("./models");
+    // db.Article.create({
+    //   title: article.title,
+    //   author: article.author,
+    //   body: article.content,
+    //   url: article.url
+    // }).then(function(dbArticle) {
+    //   console.log(dbArticle);
+    // });
+    $(".create-form").on("submit", function(event) {
+      // Make sure to preventDefault on a submit event.
+      event.preventDefault();
+
+      var newArticle = {
+        title: title,
+        author: author,
+        body: body,
+        url: url
+      };
+
+      // Send the POST request.
+      $.ajax("/api/articles", {
+        type: "POST",
+        data: newArticle
+      }).then(function() {
+        console.log("created new article");
+        // Reload the page to get the updated list
+      });
+    });
+    console.log(title);
+    console.log(author);
+    console.log(body);
+    console.log(url);
+  });
+}
