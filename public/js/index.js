@@ -164,3 +164,8 @@ function axiosCall(input) {
   });
 }
 
+$("#get-user").on("click", function() {
+  var user = firebase.auth().currentUser.email;
+
+  console.log(user);
+});
