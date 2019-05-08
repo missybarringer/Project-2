@@ -13,9 +13,9 @@ module.exports = function(app) {
 
   // TESTING ROUTE FOR API CALLS
   app.get("/articles", function(req, res) {
-    db.Article.findOne({}).then(function(dbArticles) {
+    db.Article.findAll({}).then(function(dbArticles) {
       res.render("article", {
-        msg: "Article Page!",
+        msg: "My Articles",
         articles: dbArticles
       });
     });
