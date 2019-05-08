@@ -1,4 +1,5 @@
 var db = require("../models");
+// var email = require("../public/js/index.js");
 
 module.exports = function(app) {
   // Load index page
@@ -10,9 +11,10 @@ module.exports = function(app) {
       });
     });
   });
-
   // TESTING ROUTE FOR API CALLS
   app.get("/articles", function(req, res) {
+    // var email = firebase.auth().currentUser.email;
+    //db.Article.findAll({ where: { email: email } }).then(function(dbArticles) {
     db.Article.findAll({}).then(function(dbArticles) {
       res.render("article", {
         msg: "My Articles",

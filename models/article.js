@@ -4,7 +4,8 @@ module.exports = function(sequelize, DataTypes) {
     author: DataTypes.STRING,
     category: DataTypes.STRING,
     body: DataTypes.TEXT,
-    url: DataTypes.STRING
+    url: DataTypes.STRING,
+    email: DataTypes.STRING
   });
   return Article;
 };
