@@ -12,16 +12,6 @@ module.exports = function(app) {
   });
 
   // TESTING ROUTE FOR API CALLS
-  app.get("/test", function(req, res) {
-    db.Article.findAll({ limit: 10 }).then(function(dbArticles) {
-      res.render("test", {
-        msg: "Topics Page!",
-        articles: dbArticles
-      });
-    });
-  });
-
-  // TESTING ROUTE FOR API CALLS
   app.get("/articles", function(req, res) {
     db.Article.findOne({}).then(function(dbArticles) {
       res.render("article", {
