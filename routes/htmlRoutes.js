@@ -13,9 +13,9 @@ module.exports = function(app) {
 
   // TESTING ROUTE FOR API CALLS
   app.get("/test", function(req, res) {
-    db.Article.findAll({}).then(function(dbArticles) {
+    db.Article.findAll({ limit: 10 }).then(function(dbArticles) {
       res.render("test", {
-        msg: "Test Page!",
+        msg: "Topics Page!",
         articles: dbArticles
       });
     });
@@ -23,7 +23,7 @@ module.exports = function(app) {
 
   // TESTING ROUTE FOR API CALLS
   app.get("/articles", function(req, res) {
-    db.Article.findOne({ where: { id: [1] } }).then(function(dbArticles) {
+    db.Article.findOne({}).then(function(dbArticles) {
       res.render("article", {
         msg: "Article Page!",
         articles: dbArticles

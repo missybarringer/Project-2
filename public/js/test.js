@@ -1,3 +1,35 @@
+// Your web app's Firebase configuration
+var firebaseConfig = {
+  // Todo: hide api key before production
+  apiKey: "AIzaSyDlUwgWUrPu6n65n98uiaJne_VWKSns0V0",
+  authDomain: "project-2-e4025.firebaseapp.com",
+  databaseURL: "https://project-2-e4025.firebaseio.com",
+  projectId: "project-2-e4025",
+  storageBucket: "project-2-e4025.appspot.com",
+  messagingSenderId: "5606848709",
+  appId: "1:5606848709:web:31d2666f303e34f8"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+// make auth and firestore references
+const auth = firebase.auth();
+const db = firebase.firestore();
+// firebaseConfig.authDomain().onAuthStateChanged(function(user) {
+//   if (user) {
+//     // user is signed in
+//   } else {
+//     // user is not signed in
+//   }
+// });
+// var user = firebase.auth().currentUser;
+// if (user) {
+//   // user is signed in
+//   console.log(user);
+// } else {
+//   // user is not signed in
+// }
+// console.log(firebase.auth().currentUser.uid);
 $("#api-test").on("click", function() {
   topicInput = $("#topic-input")
     .val()
@@ -54,7 +86,6 @@ function axiosCall(input) {
     console.log(url);
   });
 }
-
 // $("#api-test").on("click", function() {
 //   var topicInput = $("#topic-input")
 //     .val()

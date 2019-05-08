@@ -162,8 +162,17 @@ loginForm.addEventListener('submit', (e) => {
     const password = loginForm['login-password'].value;
 
     auth.signInWithEmailAndPassword(email, password).then(cred => {
-        
+      // admin.auth().verifyIdToken(idToken)
+      // .then(function(decodedToken) {
+      //   var uid = decodedToken.uid;
+      // }).catch(function(error) {
+      //   console.log(error);
+      // });
       // log users -test-
+      // currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+      // console.log(currentUser);
+      
+      // console.log(firebase.auth().currentUser.email);
       console.log(cred.user, cred.user.uid);
 
       // close log in modal and the reset the form
@@ -171,8 +180,9 @@ loginForm.addEventListener('submit', (e) => {
       M.Modal.getInstance(modal).close();
       loginForm.reset();
     });
+    var uidEmail = firebase.auth().currentUser.email;
+    console.log(uidEmail);
 });
-
 // logout user
 //===============================================================
 
