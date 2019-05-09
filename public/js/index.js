@@ -68,17 +68,7 @@ loginForm.addEventListener('submit', (e) => {
     const password = loginForm['login-password'].value;
 
     auth.signInWithEmailAndPassword(email, password).then(cred => {
-      // admin.auth().verifyIdToken(idToken)
-      // .then(function(decodedToken) {
-      //   var uid = decodedToken.uid;
-      // }).catch(function(error) {
-      //   console.log(error);
-      // });
-      // log users -test-
-      // currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-      // console.log(currentUser);
-      
-      // console.log(firebase.auth().currentUser.email);
+
       console.log(cred.user, cred.user.uid);
 
       // close log in modal and the reset the form
@@ -86,8 +76,6 @@ loginForm.addEventListener('submit', (e) => {
       M.Modal.getInstance(modal).close();
       loginForm.reset();
     });
-    var uidEmail = firebase.auth().currentUser.email;
-    console.log(uidEmail);
 });
 // logout user
 //===============================================================
@@ -119,7 +107,7 @@ function axiosCall(input) {
   var url =
     "https://newsapi.org/v2/everything?q=" +
     input +
-    "&pageSize=1&apiKey=1b3b33c2dd9a427aab31f5e1f7dc78e4";
+    "news_api_key";
 
   axios.get(url).then(function(response) {
     var article = response.data.articles[0];
@@ -128,24 +116,17 @@ function axiosCall(input) {
     var author = article.author;
     var body = article.content;
     var url = article.url;
-    // var db = require("./models");
-    // db.Article.create({
-    //   title: article.title,
-    //   author: article.author,
-    //   body: article.content,
-    //   url: article.url
-    // }).then(function(dbArticle) {
-    //   console.log(dbArticle);
-    // });
+
     $(".create-form").on("submit", function(event) {
       // Make sure to preventDefault on a submit event.
       event.preventDefault();
-
+      var email = firebase.auth().currentUser.email;
       var newArticle = {
         title: title,
         author: author,
         body: body,
-        url: url
+        url: url,
+        email: email
       };
 
       // Send the POST request.
@@ -154,7 +135,6 @@ function axiosCall(input) {
         data: newArticle
       }).then(function() {
         console.log("created new article");
-        // Reload the page to get the updated list
       });
     });
     console.log(title);
@@ -163,9 +143,3 @@ function axiosCall(input) {
     console.log(url);
   });
 }
-
-$("#get-user").on("click", function() {
-  var user = firebase.auth().currentUser.email;
-
-  console.log(user);
-});
