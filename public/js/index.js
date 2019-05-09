@@ -56,6 +56,7 @@ signupForm.addEventListener('submit', (e) => {
     });
 });
 
+
 // login user
 //===============================================================
 
@@ -143,3 +144,50 @@ function axiosCall(input) {
     console.log(url);
   });
 }
+
+
+//Inital array of Pre determined toics
+var preButtons = ["javascript","Avengers","NFL Draft","Coding","TN House"]
+
+//Generate buttons for topics in the array
+for (var i = 0; i < preButtons.length; i++) {
+
+  //Generate buttons for buttons in the array
+      var newButton = $("<button>");
+  //creates button class  
+      newButton.addClass("ourButton waves-effect waves-light btn");
+  //adding a data-attr
+      newButton.attr("data-name", preButtons[i]);
+  //inital button text
+      newButton.text(preButtons[i]);
+  //adds button to html
+      $(".buttons-view").append(newButton);
+      }
+//Hides landing card in html when page is first loaded
+      $(document).ready(function() {
+        $(".landingCard").hide();
+      });
+
+      $(document).on("click", ".ourButton", function() {
+        
+        $(".landingCard").show();
+        var ourTopics = $(this).attr("data-name");
+        console.log(ourTopics)
+
+        $.ajax({
+          url:
+            "https://newsapi.org/v2/everything?q=" +
+            ourTopics +
+            "&apiKey=70a63249c97548da8c4cb9a90d1d5597",
+          success: function(result) {
+            var article = result.articles[0];
+      
+            $("#title").text(article.title);
+            $("#author").text(article.author);
+            $("#body").text(article.content);
+            $("#links").attr("href", article.url);
+          }
+        });
+
+      
+      });
