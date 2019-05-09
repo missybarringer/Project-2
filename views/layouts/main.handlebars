@@ -5,11 +5,62 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="/styles/styles.css" media="screen" title="no title" charset="utf-8">
+  <!-- Materialize CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  {{!-- Materialize Icons --}}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
   <title>Home Page</title>
 </head>
 
 <body>
-  {{{body}}}
+
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo">Project 2</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#"><i class="small material-icons modal-trigger" data-target="modal-signup">person_add</i></a></li>
+
+        <li><a href="#"><i class="small material-icons modal-trigger" data-target="modal-login">person</i></a></li>
+
+        <li><a href="#"><i id="Logout" class="small material-icons">person_outline</i></a></li>
+
+        <li><a href="/">My Topics</a></li>
+        <li><a href="/articles">My Articles</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    
+    {{{body}}}
+
+  </main>
+
+  <footer class="page-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Footer Content</h5>
+          <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        © 2019 Project 2
+        <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Materialize JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  {{!-- Axios CDN --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+
 </body>
 
 </html>

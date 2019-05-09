@@ -1,99 +1,145 @@
+// Your web app's Firebase configuration
+var firebaseConfig = {
+  // Todo: hide api key before production
+  apiKey: "AIzaSyDlUwgWUrPu6n65n98uiaJne_VWKSns0V0",
+  authDomain: "project-2-e4025.firebaseapp.com",
+  databaseURL: "https://project-2-e4025.firebaseio.com",
+  projectId: "project-2-e4025",
+  storageBucket: "project-2-e4025.appspot.com",
+  messagingSenderId: "5606848709",
+  appId: "1:5606848709:web:31d2666f303e34f8"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+// make auth and firestore references
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+// setup materialize components
+document.addEventListener("DOMContentLoaded", function() {
+  //init modals
+  var modals = document.querySelectorAll(".modal");
+  M.Modal.init(modals);
+});
+
 // Get references to page elements
 var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
-// The API object contains methods for each kind of request we'll make
-var API = {
-  saveExample: function(example) {
-    return $.ajax({
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      url: "api/examples",
-      data: JSON.stringify(example)
+
+
+// signup user
+//===============================================================
+
+const signupForm = document.querySelector('#signup-form');
+signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    //get user info
+    const email = signupForm['signup-email'].value;
+    const password = signupForm['signup-password'].value;
+
+    //log info - test - 
+    console.log(email, password);
+
+    // sign up the user
+    auth.createUserWithEmailAndPassword(email, password).then(cred => {
+
+        console.log(cred.user);
+
+        const modal = document.querySelector('#modal-signup');
+        M.Modal.getInstance(modal).close();
+        signupForm.reset();
     });
-  },
-  getExamples: function() {
-    return $.ajax({
-      url: "api/examples",
-      type: "GET"
+});
+
+// login user
+//===============================================================
+
+const loginForm = document.querySelector('#login-form');
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // get the user info from input fields
+    const email = loginForm['login-email'].value;
+    const password = loginForm['login-password'].value;
+
+    auth.signInWithEmailAndPassword(email, password).then(cred => {
+
+      console.log(cred.user, cred.user.uid);
+
+      // close log in modal and the reset the form
+      const modal = document.querySelector('#modal-login');
+      M.Modal.getInstance(modal).close();
+      loginForm.reset();
     });
-  },
-  deleteExample: function(id) {
-    return $.ajax({
-      url: "api/examples/" + id,
-      type: "DELETE"
-    });
-  }
-};
+});
+// logout user
+//===============================================================
 
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
-      var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
+const logout = document.querySelector('#Logout');
 
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": example.id
-        })
-        .append($a);
+logout.addEventListener('click', (e) => {
+  e.preventDefault();
 
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
-
-      $li.append($button);
-
-      return $li;
-    });
-
-    $exampleList.empty();
-    $exampleList.append($examples);
+  // sign out the user
+  auth.signOut().then(() => {
+    console.log('user signed out');
   });
-};
+});
 
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
-  event.preventDefault();
 
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
-  };
+// API search
+//===============================================================
 
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
-    return;
-  }
+$("#api-test").on("click", function() {
+  topicInput = $("#topic-input")
+    .val()
+    .trim();
 
-  API.saveExample(example).then(function() {
-    refreshExamples();
+  axiosCall(topicInput);
+});
+
+function axiosCall(input) {
+  var url =
+    "https://newsapi.org/v2/everything?q=" +
+    input +
+    "news_api_key";
+
+  axios.get(url).then(function(response) {
+    var article = response.data.articles[0];
+
+    var title = article.title;
+    var author = article.author;
+    var body = article.content;
+    var url = article.url;
+
+    $(".create-form").on("submit", function(event) {
+      // Make sure to preventDefault on a submit event.
+      event.preventDefault();
+      var email = firebase.auth().currentUser.email;
+      var newArticle = {
+        title: title,
+        author: author,
+        body: body,
+        url: url,
+        email: email
+      };
+
+      // Send the POST request.
+      $.ajax("/api/articles", {
+        type: "POST",
+        data: newArticle
+      }).then(function() {
+        console.log("created new article");
+      });
+    });
+    console.log(title);
+    console.log(author);
+    console.log(body);
+    console.log(url);
   });
-
-  $exampleText.val("");
-  $exampleDescription.val("");
-};
-
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
-  var idToDelete = $(this)
-    .parent()
-    .attr("data-id");
-
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
-  });
-};
-
-// Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+}

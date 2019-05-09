@@ -1,0 +1,31 @@
+<div id="home">
+  <div class="container">
+    <div class="row">
+      <div class="col-8 offset-2">
+        <h1>{{msg}}</h1>
+        <div class="article">
+
+          <ul class="collapsible popout">
+
+            {{#each articles}}
+
+            <li>
+              <div class="collapsible-header"><i class="material-icons">filter_drama</i>{{this.title}}</div>
+              <div class="collapsible-body">
+                {{this.body}}
+                <button> <a href="{{this.url}}" target="_blank">Read more</a></button>
+              </div>
+            </li>
+
+            {{/each}}
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/article.js"></script>

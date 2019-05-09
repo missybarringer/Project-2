@@ -1,33 +1,110 @@
+  <!-- SIGN UP MODAL -->
+<div id="modal-signup" class="modal">
+    <div class="modal-content">
+        <h4>Sign Up</h4><br />
+        <form action="" id="signup-form">
+            <div class="input-field">
+                <input type="email" id="signup-email" required />
+                <label for="signup-email"> Email address </label>
+            </div>
+            <div class="input-field">
+                <input type="password" id="signup-password" required />
+                <label for="signup-password">Enter Password</label>
+            </div>
+            <button class="btn waves-effect waves-light z-depth-0">Sign Up</button>
+        </form>
+    </div>
+</div>
+
+    <!-- LOGIN MODAL -->
+<div id="modal-login" class="modal">
+    <div class="modal-content">
+        <h4>Login</h4><br />
+        <form action="" id="login-form">
+            <div class="input-field">
+                <input type="email" id="login-email" required />
+                <label for="login-email"> Email address </label>
+            </div>
+            <div class="input-field">
+                <input type="password" id="login-password" required />
+                <label for="login-password">Your Password</label>
+            </div>
+            <button class="btn waves-effect waves-light z-depth-0">Login</button>
+        </form>
+    </div>
+</div>
+
+
+<!--Topic Buttons Section-->
+
+<div class="container">
+  <div class="row">
+    <div class="col-8 offset-2">
+    <h2>Have No Clue ? We Do.</h2>
+    <div class="buttonBox">
+            <div class="buttons-view"></div>
+        </div>
+<br>
+  </div>
+  </div>
+</div>
+
+<!--Pre determined Card Dump -->
 <div id="home">
   <div class="container">
     <div class="row">
       <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
-        <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
-          </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
+
+<div class="landingCard">
+  <div class="row">
+    <div class="col s12 m6">
+            <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title" id="title"><h2>Title</h2></span>
+          <h5 id="author">Author</h5>
+          <p id="body">Talk to me Nice.</p>
+        </div>
+        <div class="card-action">
+          <a id="links" href=" " target="_blank">Read More</a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+      </div>
+    </div>
+  
+    </div>
+  </div>
+</div>
+
+<!--Search Bar section-->
+
+<div id="home">
+  <div class="container">
+    <div class="row">
+      <div class="col-8 offset-2">
+        <h1>Search Here</h1>
+
+
+        <input id="topic-input" type="text" placeholder="topic">
+
+        <button id="api-test">TEST</button>
+
+        <form class="create-form">
+          <button type="submit">Add Topic</button>
         </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
       </div>
     </div>
   </div>
 </div>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-firestore.js"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
