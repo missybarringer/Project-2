@@ -1,9 +1,16 @@
+/* COLORS
+PINK: #EB6A5C
+NAVY: #2B3359
+*/
+
+
 /* GLOBAL */
 
 body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  background-color: rgb(229, 237, 250);
 }
 
 .list-group-item {
@@ -20,4 +27,23 @@ body {
 
 main {
   flex: 1 0 auto;
+}
+
+/* NAVBAR */
+nav { background-color: #2B3359!important; }
+
+#nav-logo {
+  height: 60px;
+  margin: 0 1rem 0 4rem;
+}
+
+#brand-text {
+  font-size: 1rem;
+}
+
+/* SEARCH BOX */
+
+#search-box {
+  background-color: #2B3359;
+  padding: 4rem 0;
 }
