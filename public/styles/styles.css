@@ -41,9 +41,27 @@ nav { background-color: #2B3359!important; }
   font-size: 1rem;
 }
 
+/* PREMADE BUTTONS */
+
+.ourButton {
+  margin:0 auto!important;
+  display:inline-block!important;
+}
+
 /* SEARCH BOX */
 
 #search-box {
   background-color: #2B3359;
   padding: 4rem 0;
+}
+
+/* FOOTER */
+
+#footer-logo {
+  height: 100px;
+}
+
+.contributor {
+  margin-right: 1rem;
+  color: #fff;
 }
