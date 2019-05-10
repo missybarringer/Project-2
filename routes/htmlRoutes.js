@@ -11,11 +11,11 @@ module.exports = function(app) {
       });
     });
   });
-  // TESTING ROUTE FOR API CALLS
-  app.get("/articles", function(req, res) {
-    // var email = firebase.auth().currentUser.email;
-    //db.Article.findAll({ where: { email: email } }).then(function(dbArticles) {
-    db.Article.findAll({}).then(function(dbArticles) {
+
+  app.get("/articles/:email", function(req, res) {
+    db.Article.findAll({ where: { email: req.params.email } }).then(function(dbArticles) {
+      console.log("--------------------------------------------------");
+      console.log(req.params.email);
       res.render("article", {
         msg: "My Articles",
         articles: dbArticles

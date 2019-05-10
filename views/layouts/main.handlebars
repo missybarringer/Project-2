@@ -28,13 +28,13 @@
         <li><a href="#"><i id="Logout" class="small material-icons">person_outline</i></a></li>
 
         <li><a href="/">My Topics</a></li>
-        <li><a href="/articles">My Articles</a></li>
+        <li><a id="articles" href="#">My Articles</a></li>
       </ul>
     </div>
   </nav>
 
   <main>
-    
+
     {{{body}}}
 
   </main>
@@ -61,6 +61,19 @@
   {{!-- Axios CDN --}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 
+  <script>
+    $("#articles").on("click", function () {
+      var email = localStorage.getItem("email");
+
+      window.location.href = `http://localhost:3000/articles/${email}`;
+    });
+  </script>
 </body>
 
 </html>
+
+{{!-- 
+event listener on article
+
+create new url that is concatinating pulled email and reroutes to page
+ --}}
