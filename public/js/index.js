@@ -16,8 +16,9 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
+
 // setup materialize components
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   //init modals
   var modals = document.querySelectorAll(".modal");
   M.Modal.init(modals);
@@ -36,47 +37,49 @@ var $exampleList = $("#example-list");
 
 const signupForm = document.querySelector('#signup-form');
 signupForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    //get user info
-    const email = signupForm['signup-email'].value;
-    const password = signupForm['signup-password'].value;
+  e.preventDefault();
 
-    //log info - test - 
-    console.log(email, password);
+  //get user info
+  const email = signupForm['signup-email'].value;
+  const password = signupForm['signup-password'].value;
 
-    // sign up the user
-    auth.createUserWithEmailAndPassword(email, password).then(cred => {
+  //log info - test - 
+  console.log(email, password);
 
-        console.log(cred.user);
+  // sign up the user
+  auth.createUserWithEmailAndPassword(email, password).then(cred => {
 
-        const modal = document.querySelector('#modal-signup');
-        M.Modal.getInstance(modal).close();
-        signupForm.reset();
-    });
+    console.log(cred.user);
+
+    const modal = document.querySelector('#modal-signup');
+    M.Modal.getInstance(modal).close();
+    signupForm.reset();
+  });
 });
-
 
 // login user
 //===============================================================
 
 const loginForm = document.querySelector('#login-form');
 loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    // get the user info from input fields
-    const email = loginForm['login-email'].value;
-    const password = loginForm['login-password'].value;
+  // get the user info from input fields
+  const email = loginForm['login-email'].value;
+  const password = loginForm['login-password'].value;
 
-    auth.signInWithEmailAndPassword(email, password).then(cred => {
+  auth.signInWithEmailAndPassword(email, password).then(cred => {
 
-      console.log(cred.user, cred.user.uid);
+    console.log(cred.user, cred.user.uid);
 
-      // close log in modal and the reset the form
-      const modal = document.querySelector('#modal-login');
-      M.Modal.getInstance(modal).close();
-      loginForm.reset();
-    });
+    // PUT EMAIL INTO LOCAL STORAGE
+    localStorage.setItem("email", email);
+
+    // close log in modal and the reset the form
+    const modal = document.querySelector('#modal-login');
+    M.Modal.getInstance(modal).close();
+    loginForm.reset();
+  });
 });
 // logout user
 //===============================================================
@@ -96,7 +99,7 @@ logout.addEventListener('click', (e) => {
 // API search
 //===============================================================
 
-$("#api-test").on("click", function() {
+$("#api-test").on("click", function () {
   topicInput = $("#topic-input")
     .val()
     .trim();
@@ -108,9 +111,9 @@ function axiosCall(input) {
   var url =
     "https://newsapi.org/v2/everything?q=" +
     input +
-    "news_api_key";
+    "&pageSize=1&apiKey=1b3b33c2dd9a427aab31f5e1f7dc78e4";
 
-  axios.get(url).then(function(response) {
+  axios.get(url).then(function (response) {
     var article = response.data.articles[0];
 
     var title = article.title;
@@ -118,10 +121,10 @@ function axiosCall(input) {
     var body = article.content;
     var url = article.url;
 
-    $(".create-form").on("submit", function(event) {
+    $(".create-form").on("submit", function (event) {
       // Make sure to preventDefault on a submit event.
       event.preventDefault();
-      var email = firebase.auth().currentUser.email;
+      var email = auth.currentUser.email;
       var newArticle = {
         title: title,
         author: author,
@@ -134,7 +137,7 @@ function axiosCall(input) {
       $.ajax("/api/articles", {
         type: "POST",
         data: newArticle
-      }).then(function() {
+      }).then(function () {
         console.log("created new article");
       });
     });
@@ -145,49 +148,48 @@ function axiosCall(input) {
   });
 }
 
-
 //Inital array of Pre determined toics
-var preButtons = ["javascript","Avengers","NFL Draft","Coding","TN House"]
+var preButtons = ["javascript", "Avengers", "NFL Draft", "Coding", "TN House"]
 
 //Generate buttons for topics in the array
 for (var i = 0; i < preButtons.length; i++) {
 
   //Generate buttons for buttons in the array
-      var newButton = $("<button>");
+  var newButton = $("<button>");
   //creates button class  
-      newButton.addClass("ourButton waves-effect waves-light btn");
+  newButton.addClass("ourButton waves-effect waves-light btn");
   //adding a data-attr
-      newButton.attr("data-name", preButtons[i]);
+  newButton.attr("data-name", preButtons[i]);
   //inital button text
-      newButton.text(preButtons[i]);
+  newButton.text(preButtons[i]);
   //adds button to html
-      $(".buttons-view").append(newButton);
-      }
+  $(".buttons-view").append(newButton);
+}
 //Hides landing card in html when page is first loaded
-      $(document).ready(function() {
-        $(".landingCard").hide();
-      });
+$(document).ready(function () {
+  $(".landingCard").hide();
+});
 
-      $(document).on("click", ".ourButton", function() {
-        
-        $(".landingCard").show();
-        var ourTopics = $(this).attr("data-name");
-        console.log(ourTopics)
+$(document).on("click", ".ourButton", function () {
 
-        $.ajax({
-          url:
-            "https://newsapi.org/v2/everything?q=" +
-            ourTopics +
-            "&apiKey=70a63249c97548da8c4cb9a90d1d5597",
-          success: function(result) {
-            var article = result.articles[0];
-      
-            $("#title").text(article.title);
-            $("#author").text(article.author);
-            $("#body").text(article.content);
-            $("#links").attr("href", article.url);
-          }
-        });
+  $(".landingCard").show();
+  var ourTopics = $(this).attr("data-name");
+  console.log(ourTopics)
 
-      
-      });
+  $.ajax({
+    url:
+      "https://newsapi.org/v2/everything?q=" +
+      ourTopics +
+      "&apiKey=70a63249c97548da8c4cb9a90d1d5597",
+    success: function (result) {
+      var article = result.articles[0];
+
+      $("#title").text(article.title);
+      $("#author").text(article.author);
+      $("#body").text(article.content);
+      $("#links").attr("href", article.url);
+    }
+  });
+
+
+});
