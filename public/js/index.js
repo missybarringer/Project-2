@@ -30,7 +30,39 @@ var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
+//show links based on user status
+//==============================================================
+const loggedOutLinks = document.querySelectorAll('.logged-out');
+const loggedInLinks = document.querySelectorAll('.logged-in');
 
+const setupUI = (user) => {
+  if (user) {
+
+      //toggle ui elements
+      loggedInLinks.forEach(item => item.style.display = 'block');
+      loggedOutLinks.forEach(item => item.style.display = 'none');
+
+  } else {
+
+      //toggle ui element
+      loggedInLinks.forEach(item => item.style.display = 'none');
+      loggedOutLinks.forEach(item => item.style.display = 'block');
+
+  }
+}
+
+// listen for auth status changes
+//===============================================================
+
+auth.onAuthStateChanged(user => {
+  if (user) {
+      db.collection('posts').onSnapshot(snapshot => {
+          setupUI(user);
+      });
+  } else {
+      setupUI();
+  }
+});
 
 // signup user
 //===============================================================
@@ -76,7 +108,7 @@ loginForm.addEventListener('submit', (e) => {
     localStorage.setItem("email", email);
 
     // close log in modal and the reset the form
-    const modal = document.querySelector('#modal-login');
+    const modal = document.querySelector('#modal-signup');
     M.Modal.getInstance(modal).close();
     loginForm.reset();
   });
