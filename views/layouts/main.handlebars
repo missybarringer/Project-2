@@ -12,23 +12,27 @@
 
 
 
-  <title>Home Page</title>
+  <title>DayLearner</title>
 </head>
 
 <body>
 
-  <nav>
+  <nav class="grey darken-3">
     <div class="nav-wrapper">
+
       <a href="/" class="brand-logo"> <img src="images/brain-pink.png" alt="logo" id="nav-logo">DAYLEARNER</a>
+
+      <a href="/" class="brand-logo">DayLearner</a>
+
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="#"><i class="small material-icons modal-trigger" data-target="modal-signup">person_add</i></a></li>
+        <li class="logged-out" style="display: none;"><a href="#"><i class="small material-icons modal-trigger" data-target="modal-signup">person_add</i></a></li>
 
-        <li><a href="#"><i class="small material-icons modal-trigger" data-target="modal-login">person</i></a></li>
+        <li class="logged-out" style="display: none;"><a href="#"><i class="small material-icons modal-trigger" data-target="modal-login">person</i></a></li>
 
-        <li><a href="#"><i id="Logout" class="small material-icons">person_outline</i></a></li>
+        <li class="logged-in" style="display: none;"><a href="#"><i id="Logout" class="small material-icons">person_outline</i></a></li>
 
-        <li><a href="/">My Topics</a></li>
-        <li><a id="articles" href="#">My Articles</a></li>
+        <li class="logged-in" style="display: none;"><a href="/">My Topics</a></li>
+        <li class="logged-in" style="display: none;"><a id="articles" href="#">My Articles</a></li>
       </ul>
     </div>
   </nav>
@@ -38,6 +42,7 @@
     {{{body}}}
 
   </main>
+
   <footer class="page-footer">
     <div class="container">
       <div class="row">
@@ -49,13 +54,26 @@
           <a class="contributor" href="https://github.com/Caleb5981" target="_blank">Christian Chavez</a>
           <a class="contributor" href="https://github.com/CameronForrest" target="_blank">Cam Forrest</a>
           <a class="contributor" href="https://github.com/missybarringer" target="_blank">Missy Barringer</a>
-          <a class="contributor" href="https://github.com/bshurts93" target="_blank">Ben Shurts</a>
+
+
+  <footer class="page-footer grey darken-3">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">DayLearner</h5>
+          <p class="grey-text text-lighten-4">Something new everyday</p>
+
         </div>
       </div>
     </div>
     <div class="footer-copyright">
       <div class="container">
+
         © 2019 DAYLEARNER
+
+        © 2019 Project 2
+        <a class="grey-text text-lighten-4 right" href="https://github.com/missybarringer/Project-2"> Fork Us! </a>
+
       </div>
     </div>
   </footer>
