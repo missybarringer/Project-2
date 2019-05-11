@@ -70,3 +70,8 @@ nav .brand-logo {
   margin-left: 25px;
 
 }
+
+.buttonBox {
+  display: flex;
+  justify-content: center;
+}
