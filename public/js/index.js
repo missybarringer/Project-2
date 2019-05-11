@@ -189,7 +189,7 @@ for (var i = 0; i < preButtons.length; i++) {
   //Generate buttons for buttons in the array
   var newButton = $("<button>");
   //creates button class  
-  newButton.addClass("ourButton waves-effect waves-light btn");
+  newButton.addClass("ourButton red lighten-2 waves-effect waves-light btn");
   //adding a data-attr
   newButton.attr("data-name", preButtons[i]);
   //inital button text
