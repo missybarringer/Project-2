@@ -135,7 +135,7 @@ $("#api-test").on("click", function () {
   topicInput = $("#topic-input")
     .val()
     .trim();
-
+  alert("Article queued. Select 'Add Article' to save to your articles page.");
   axiosCall(topicInput);
 });
 
@@ -156,6 +156,7 @@ function axiosCall(input) {
     $(".create-form").on("submit", function (event) {
       // Make sure to preventDefault on a submit event.
       event.preventDefault();
+      alert("Article saved! Go to 'My Articles' to check it out.");
       var email = auth.currentUser.email;
       var newArticle = {
         title: title,

@@ -56,6 +56,10 @@ nav { background-color: #2B3359!important; }
   padding: 4rem 0;
 }
 
+.create-form {
+  display: inline-block;
+}
+
 /* FOOTER */
 
 #footer-logo {
