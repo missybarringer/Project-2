@@ -20,7 +20,7 @@ ___________________________________________________________
 ## The MVP
 ### Search, Choose Topic, Read, Learn, & Save
 ___________________________________________________________
-
+![alt text](./images/loginScrn.PNG)
 [View a recorded demo:](https://drive.google.com/file/d/1Iml4gSdEiPFMHG7EAY7FUVK1DGNNfowr/view)
 ___________________________________________________________
 ## Technologies used:
